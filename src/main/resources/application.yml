@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: bando
+    password: bando
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa: 
+    hibernate:
+      ddl-auto: none     
+    properties:
+      hibernate.jdbc.fetch_size: 300
+      hibernate.jdbc.batch_size: 100
+  jta:
+    atomikos:
+      properties:
+        threaded-two-phase-commit: true
+        enable-logging: false
+        max-timeout: 600000
+#  devtools:
+#    livereload:
+#      port: 8082
+#      enabled: false
+#    restart:
+#      additional-paths: resources/web/zul/**
+#      enabled: true
+#      log-condition-evaluation-delta: true
+#  freemarker:
+#    # set true in product Mode
+#    cache: false
+#  groovy:
+#    template:
+#      cache: false
+  
+server:
+  port: 8082
+  servlet:
+    context-path: /bandozk

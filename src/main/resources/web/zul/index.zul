@@ -1,0 +1,30 @@
+<?page title="Test" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" href="/css/bootstrap-4.0.0-alpha.6-dist.css"?>
+<zk>
+	<vlayout vflex="min" viewModel="@id('vm') @init('zk.springboot.vm.client.indexVM')">
+		<panel>
+			<panelchildren style="background-color: #0064ed;color:white;">
+				<hbox align="start">
+					<label value="BackEnd Panel" />
+				</hbox>
+				<!-- <hbox align="end"> -->
+				<!-- 	<label value="Hello " /> -->
+				<!-- 	<label value="Admin" /> -->
+				<!-- </hbox> -->
+			</panelchildren>
+		</panel>
+		<hlayout>
+			<vlayout hflex="1">
+				<navbar orient="vertical">
+					<navitem label="商家/商品管理" selected="true" onClick="@command('navigate', page='q001')"/>
+					<navitem label="訂單管理" onClick="@command('navigate', page='q002')"/>
+					<navitem label="日程表管理" />
+				</navbar>
+			</vlayout>
+			
+			<vlayout hflex="5">
+				<include src="@load(vm.currentUri)"/>
+			</vlayout>
+		</hlayout>
+	</vlayout>
+</zk>
