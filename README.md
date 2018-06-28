@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ZK Spring Boot
 
 Starter Project for ZK with Spring Boot
@@ -40,3 +41,7 @@ http://localhost:8080/richlet/test (sample richlet - zk in pure java)
 
 ## License
 * Demo Code - [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+=======
+# helloGit
+Just for looking in Github
+>>>>>>> branch 'master' of https://github.com/monkeyLouis/helloGit.git
