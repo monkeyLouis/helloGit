@@ -18,7 +18,7 @@ public class OrderDetail implements Serializable {
 	
 	@Id
 	@Column(name="OMID")
-	private String omId;
+	private OrderMaster omId;
 	
 	@Id
 	@Column(name="FOODID")
@@ -43,11 +43,11 @@ public class OrderDetail implements Serializable {
 		this.odQua = odQua;
 	}
 
-	public String getOmId() {
+	public OrderMaster getOmId() {
 		return omId;
 	}
 
-	public void setOmId(String omId) {
+	public void setOmId(OrderMaster omId) {
 		this.omId = omId;
 	}
 
@@ -58,7 +58,5 @@ public class OrderDetail implements Serializable {
 	public void setFoodId(Food foodId) {
 		this.foodId = foodId;
 	}
-	
-	
 	
 }

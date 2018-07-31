@@ -1,5 +1,10 @@
 package zk.springboot.vm.admin.bd002;
 
+import static zk.springboot.enums.PayStatus.NOPAY;
+import static zk.springboot.enums.PayStatus.PAYED;
+
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.bind.annotation.BindingParam;
@@ -11,13 +16,13 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zkplus.spring.DelegatingVariableResolver;
 import org.zkoss.zul.ListModelList;
 
-import zk.springboot.server.domain.Member;
 import zk.springboot.server.domain.OrderMaster;
-import zk.springboot.server.service.MemberService;
+import zk.springboot.server.domain.dto.StatusVo;
 import zk.springboot.server.service.OrderMasterService;
+import zk.springboot.util.BandoUtil;
 
 /**
- * 日程表管理 ViewModel
+ * 訂單付款管理 ViewModel
  * @author Louis
  * 2018-06-13
  */
@@ -31,10 +36,19 @@ public class Q002 {
 	private OrderMasterService orderMasterSrvc;
 	
 	private OrderMaster omSel;
+	
+	private Date dateSelected;
+	
+	private ListModelList<StatusVo> statusList;
+	
+	private StatusVo statusSelected;
+	
 	private ListModelList<OrderMaster> omListModel = new ListModelList<>();
 	
 	@Init
 	public void init() {
+		statusList = new ListModelList<StatusVo>(BandoUtil.getPayStatus(true));
+		statusSelected = statusList.get(0);
 		omListModel.addAll(orderMasterSrvc.findAll());
 		LOG.info("######## OrderMaster Size: " + orderMasterSrvc.findAll().size());
 	}
@@ -50,14 +64,30 @@ public class Q002 {
 	@NotifyChange({"omListModel","omSel"})
 	public void updatePay(@BindingParam("omTarget") OrderMaster om) {
 		Integer index = omListModel.indexOf(om);
-		if(om.getOmStatus().equals(0)) {
+		if(NOPAY.getPayStatusNo().equals(om.getOmStatus())) {
 			om.setOmStatus(1);
-		} else if(om.getOmStatus().equals(1)){
+		} else if(PAYED.getPayStatusNo().equals(om.getOmStatus())){
 			om.setOmStatus(0);
 		}
 		orderMasterSrvc.save(om);
 		omSel = om;
 		omListModel.set(index, om);
+	}
+	
+	@Command
+	@NotifyChange({"omListModel", "omSel"})
+	public void query(){
+		doQuery();
+	}
+	
+	public void doQuery() {
+		try{
+			omSel = null;
+			omListModel.clear();
+			omListModel.addAll(orderMasterSrvc.findByDate(dateSelected, statusSelected));
+		} catch (Exception e) {
+			LOG.error("doQuery", e);
+		}
 	}
 	
 	public OrderMaster getOmSel() {
@@ -74,6 +104,30 @@ public class Q002 {
 
 	public void setOmListModel(ListModelList<OrderMaster> omListModel) {
 		this.omListModel = omListModel;
+	}
+
+	public Date getDateSelected() {
+		return dateSelected;
+	}
+
+	public void setDateSelected(Date dateSelected) {
+		this.dateSelected = dateSelected;
+	}
+
+	public ListModelList<StatusVo> getStatusList() {
+		return statusList;
+	}
+
+	public void setStatusList(ListModelList<StatusVo> statusList) {
+		this.statusList = statusList;
+	}
+
+	public StatusVo getStatusSelected() {
+		return statusSelected;
+	}
+
+	public void setStatusSelected(StatusVo statusSelected) {
+		this.statusSelected = statusSelected;
 	}
 	
 }

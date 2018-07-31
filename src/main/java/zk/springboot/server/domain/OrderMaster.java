@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,17 +15,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="ORDER_MASTER")
 public class OrderMaster implements Serializable {
 
 	@Id
+	@GenericGenerator(name="sequence_om_id", strategy="zk.springboot.server.domain.generator.OrderMasterGen")
+	@GeneratedValue(generator="sequence_om_id")
 	@Column(name="OMID")
 	private String omId;
 	
 	@ManyToOne
 	@JoinColumn(name="MEMID", nullable=false)
 	private Member member;
+	
+	@ManyToOne
+	@JoinColumn(name="SCHEDULE_ID", nullable=false)
+	private Schedule scheduleId;
 	
 	@Column(name="OMDATE")
 	private Date omDate;
@@ -39,7 +48,7 @@ public class OrderMaster implements Serializable {
 	private List<OrderDetail> odList;
 	
 	@Transient
-	private Integer omSum;
+	private Integer omSum = 0;
 	
 	public String getOmId() {
 		return omId;
@@ -95,6 +104,14 @@ public class OrderMaster implements Serializable {
 
 	public void setOmSum(Integer omSum) {
 		this.omSum = omSum;
+	}
+
+	public Schedule getScheduleId() {
+		return scheduleId;
+	}
+
+	public void setScheduleId(Schedule scheduleId) {
+		this.scheduleId = scheduleId;
 	}
 
 	@Override

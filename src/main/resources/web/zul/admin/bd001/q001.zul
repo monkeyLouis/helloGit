@@ -2,14 +2,14 @@
 <?link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet"?>
 <zk>
 	<vlayout viewModel="@id('vm') @init('zk.springboot.vm.admin.bd001.Q001')">
-		<grid vflex="min">
+		<grid>
 			<columns>
 				<column label="商家查詢" />
 			</columns>
 			<rows>
 				<row>
 					<cell>
-						<label  value="商家名稱: " />
+						<label value="商家名稱: " />
 						<combobox autodrop="true" model="@load(vm.shopListModel)" selectedItem="@bind(vm.shopSel)"
 							constraint="no empty" placeholder="請選擇商家" maxlength="30" vflex="true">
 							<template name="model" var="shop">

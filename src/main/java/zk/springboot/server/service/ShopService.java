@@ -8,6 +8,6 @@ public interface ShopService {
 	
 	Shop save(Shop shop);
 	List<Shop> findAll();
-	Shop findById(String shopId);
+	Shop findByIdWithList(String shopId);
 	
 }

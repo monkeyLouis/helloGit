@@ -56,7 +56,7 @@ public class Q001 {
 	@NotifyChange("foodListModel")
 	public void query(){
 		foodListModel.clear();
-		foodListModel.addAll(shopSrvc.findById(shopSel.getShopId()).getFoodList());
+		foodListModel.addAll(shopSrvc.findByIdWithList(shopSel.getShopId()).getFoodList());
 	}
 	
 	@Command
@@ -94,7 +94,7 @@ public class Q001 {
 	@NotifyChange("foodListModel")
 	public void changeStatus(@BindingParam("food") Food food){
 		
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("確認將 ").append(food.getF_name()).append(" ");
 		if(FoodStatus.ONSHELF.getStatusNo().equals(food.getF_on())) {
 			sb.append(FoodStatus.OFFSHELF.getStatusName()).append("?");
@@ -128,7 +128,7 @@ public class Q001 {
 	@NotifyChange("foodListModel")
 	public void refreshFoodListAll(@BindingParam("shopSel") Shop shop) {
 		foodListModel.clear();
-		foodListModel.addAll(shopSrvc.findById(shop.getShopId()).getFoodList());
+		foodListModel.addAll(shopSrvc.findByIdWithList(shop.getShopId()).getFoodList());
 	}
 	
 	@GlobalCommand

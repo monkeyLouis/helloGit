@@ -1,8 +1,33 @@
-<?page title="q001" contentType="text/html;charset=UTF-8"?>
+<?page title="q002" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<hlayout vflex="min" viewModel="@id('vm') @init('zk.springboot.vm.admin.bd002.Q002')">
+<vlayout viewModel="@id('vm') @init('zk.springboot.vm.admin.bd002.Q002')">
+	<hlayout hflex="min">
+		<grid vflex="min">
+			<columns>
+				<column label="訂單查詢" />
+			</columns>
+			<rows>
+				<row>
+					<cell>
+						<label value="狀態: " />
+						<combobox width="15%" readonly="true" model="@load(vm.statusList)" selectedItem="@bind(vm.statusSelected)">
+							<template name="model">
+								<comboitem label="@load(each.statusName)" />
+							</template>
+						</combobox>
+						<space />
+						<label value="日期 : " />
+						<datebox width="25%" value="@bind(vm.dateSelected)" constraint="no future: now or never" format="yyyy-MM-dd" lenient="false" compact="false" buttonVisible="true" />
+						<space />	
+						<button label="查詢" onClick="@command('query')" class="btn btn-secondary" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</hlayout>
+	<hlayout>
 		<vlayout hflex="2">
-			<grid mold="paging" pageSize="9" vflex="min" model="@load(vm.omListModel)" emptyMessage="查無資料">
+			<grid mold="paging" pageSize="6" model="@load(vm.omListModel)" emptyMessage="查無資料">
 				<columns>
 					<column hflex="3" label="訂單日期" align="center" />
 					<column hflex="2" label="訂購者" align="center" />
@@ -81,4 +106,5 @@
 			</vbox>
 		</vlayout>
 	</hlayout>
+</vlayout>	
 </zk>

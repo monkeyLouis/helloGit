@@ -2,7 +2,6 @@ package zk.springboot.server.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,18 +9,19 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class OrderDetailId implements Serializable {
 	
-	@Column(name="OMID")
-	private String omId;
+	@ManyToOne
+	@JoinColumn(name="OMID", nullable=false)
+	private OrderMaster omId;
 	
 	@ManyToOne
 	@JoinColumn(name="FOODID")
 	private Food foodId;
 
-	public String getOmId() {
+	public OrderMaster getOmId() {
 		return omId;
 	}
 
-	public void setOmId(String omId) {
+	public void setOmId(OrderMaster omId) {
 		this.omId = omId;
 	}
 

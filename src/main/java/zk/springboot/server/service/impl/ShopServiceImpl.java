@@ -3,6 +3,8 @@ package zk.springboot.server.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import zk.springboot.server.service.ShopService;
 @Service("shopSrvc")
 public class ShopServiceImpl implements ShopService{
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ShopServiceImpl.class);
+
 	@Autowired
 	private ShopRepository shopRepository;
 
@@ -25,11 +29,11 @@ public class ShopServiceImpl implements ShopService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public Shop findById(String shopId) {
+	public Shop findByIdWithList(String shopId) {
 		Optional<Shop> shopOpt = shopRepository.findById(shopId);
 		
 		if(shopOpt.isPresent()){
-			System.out.println(shopOpt.get().getFoodList().size());
+			LOG.info("##### List size: " + shopOpt.get().getFoodList().size() + " #####");
 			return shopOpt.get();
 		}
 		

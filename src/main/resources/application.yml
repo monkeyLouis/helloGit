@@ -11,12 +11,23 @@ spring:
     properties:
       hibernate.jdbc.fetch_size: 300
       hibernate.jdbc.batch_size: 100
+  
   jta:
     atomikos:
       properties:
         threaded-two-phase-commit: true
         enable-logging: false
         max-timeout: 600000
+
+  thymeleaf:
+    cache: false
+    view-names: member/*
+
+  view:
+    prefix: /WEB-INF/
+    suffix: .jsp
+    view-names: jsp/*
+    contentType: text/html; charset=utf-8
 #  devtools:
 #    livereload:
 #      port: 8082
