@@ -1,10 +1,8 @@
 package zk.springboot.controller.rest;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -49,10 +47,8 @@ public class MemberRestController {
 	@PostMapping(value="/member/update")
 	public RestResponse save(@RequestBody @Validated Member mem, BindingResult result) {
 		if(result.hasErrors()){
-			Map<String, String> map = new HashMap<>();
 			List<FieldError> list = result.getFieldErrors();
-			
-			map = MessageUtil.getErrorMessage(list);
+			Map<String, String> map = MessageUtil.getErrorMessage(list);
 			
 			return new RestResponse<Map<String, String>>(1, "data NG", map);
 		}
@@ -84,7 +80,6 @@ public class MemberRestController {
 	 * @param result
 	 * @return memberId
 	 */
-	@Test
 	@RequestMapping(value="/valid")
 	public String valid(@ModelAttribute("vm") @Validated Member mem, BindingResult result) {
 		

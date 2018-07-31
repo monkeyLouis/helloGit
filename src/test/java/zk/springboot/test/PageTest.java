@@ -13,6 +13,7 @@ import org.zkoss.zul.Label;
 import java.util.function.Supplier;
 
 public class PageTest {
+	/*
 	@ClassRule
 	public static AutoEnvironment env = new AutoEnvironment("src/test/webapp/WEB-INF", "src/test/webapp");
 
@@ -50,4 +51,5 @@ public class PageTest {
 	private ComponentAgent secondButton() {
 		return firstButton().getNextSibling();
 	}
+	*/
 }

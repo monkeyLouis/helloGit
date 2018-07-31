@@ -1,8 +1,22 @@
-<<<<<<< HEAD
-# ZK Spring Boot
+#BANDO Order System
+It  is an convenient order system.
 
-Starter Project for ZK with Spring Boot
+##Brief
+DataBase: Oracle
+FrontEnd 	>> HTML(Thymeleaf) (internal-view member/\*)
+Login page>> jsp (internal-view jsp/\*)
+BackEnd 	>> ZK
 
+Context Path: /bandozk
+Port: 8082
+
+## External view
+Login page: /bandozk/
+Manage page: /bandozk/admin
+User page (Show all member) : /bandozk/member/showall
+User page (Test Register): /bandozk/member/
+
+# Backups
 ## Useful Build Commands 
 **NOTE:** Using the windows command line (cmd) you have to omit the "./" in front of the commands
 

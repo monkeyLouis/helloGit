@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,6 @@ public class LoginController {
 	 * @param result
 	 * @return String
 	 */
-	@Test
 	@RequestMapping(value="/jspTest")
 	public String jspTest(HttpServletRequest req, @ModelAttribute("vm") @Validated Member mem, BindingResult result){
 		
